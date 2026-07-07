@@ -9,6 +9,7 @@ import "react-native-reanimated";
 
 import "@/global.css";
 
+import { SessionProvider } from "@/context/auth";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export const unstable_settings = {
@@ -19,16 +20,18 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(app)/user/index" options={{ title: "User" }} />
-        <Stack.Screen
-          name="login"
-          options={{ headerShown: false, title: "Login" }}
-        />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="login"
+            options={{ headerShown: false, title: "Login" }}
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
