@@ -13,7 +13,7 @@ import { SessionProvider } from "@/context/auth";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export const unstable_settings = {
-  anchor: "index",
+  anchor: "(app)",
 };
 
 export default function RootLayout() {
@@ -22,13 +22,9 @@ export default function RootLayout() {
   return (
     <SessionProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="login"
-            options={{ headerShown: false, title: "Login" }}
-          />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(app)" />
+          <Stack.Screen name="login" options={{ title: "Login" }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

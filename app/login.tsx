@@ -4,6 +4,7 @@ import { useSession } from "@/context/auth";
 import { router } from "expo-router";
 import { useState } from "react";
 import { ScrollView, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /* ThemedText memiliki warna default putih, menggunakan style. */
 /* jadi perlu tanda seru/important (!) */
@@ -25,30 +26,32 @@ export default function LoginScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 p-4">
-      <ThemedView className="flex-1 p-4">
-        <TextInput
-          placeholder="Username"
-          value={username}
-          onChangeText={setUsername}
-          className="text-white bg-gray-700 p-2 rounded mt-2"
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          className="text-white bg-gray-700 p-2 rounded mt-2"
-        />
+    <SafeAreaView className="flex-1" edges={["top"]}>
+      <ScrollView>
+        <ThemedView className="p-4">
+          <TextInput
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+            className="text-white bg-gray-700 p-2 rounded mt-2"
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            className="text-white bg-gray-700 p-2 rounded mt-2"
+          />
 
-        {error && <ThemedText className="!text-red-500">{error}</ThemedText>}
-        <ThemedText
-          onPress={handleLogin}
-          className="text-white bg-blue-500 p-2 rounded mt-4"
-        >
-          Login
-        </ThemedText>
-      </ThemedView>
-    </ScrollView>
+          {error && <ThemedText className="!text-red-500">{error}</ThemedText>}
+          <ThemedText
+            onPress={handleLogin}
+            className="text-white bg-blue-500 p-2 rounded mt-4"
+          >
+            Login
+          </ThemedText>
+        </ThemedView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
