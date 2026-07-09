@@ -1,3 +1,4 @@
+import { request } from "@/shared/api.client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -37,8 +38,16 @@ export default function RegisterScreen() {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    const response = await request(
+      "https://jsonplaceholder.typicode.com/posts",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      },
+    );
+
+    console.log("response ", response);
   };
 
   return (
