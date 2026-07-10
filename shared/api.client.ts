@@ -1,8 +1,8 @@
-export async function request(
+export async function request<T>(
   url: string,
   options?: RequestInit,
   isAuth = true,
-) {
+): Promise<T> {
   const token = "123456789";
 
   const headers: Record<string, string> = {

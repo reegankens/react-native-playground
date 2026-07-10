@@ -26,16 +26,23 @@ export default function RegisterScreen() {
   }, []);
 
   const getRegister = async () => {
-    const response = await request("http://api.localhost:8081/register", {
-      method: "GET",
-    });
+    const response = await request<FormData>(
+      "http://api.localhost:8081/register",
+      {
+        method: "GET",
+      },
+    );
     console.log("getRegister response", response);
+    setValue("fullName", response.fullName);
+    setValue("email", response.email);
+    trigger();
   };
 
   const {
     control,
     handleSubmit,
     trigger,
+    setValue,
     formState: { errors, isDirty, dirtyFields, isValid },
   } = useForm<FormData>({
     resolver: yupResolver(registerSchema),
@@ -47,10 +54,13 @@ export default function RegisterScreen() {
   });
 
   const onSubmit = async (data: FormData) => {
-    const response = await request("https://api.localhost:8081/register", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    const response = await request<FormData>(
+      "https://api.localhost:8081/register",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      },
+    );
 
     console.log("response ", response);
   };
