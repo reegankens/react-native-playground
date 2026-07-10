@@ -21,8 +21,16 @@ export const registerSchema = yup.object({
 
 export default function RegisterScreen() {
   useEffect(() => {
+    getRegister();
     trigger();
   }, []);
+
+  const getRegister = async () => {
+    const response = await request("http://api.localhost:8081/register", {
+      method: "GET",
+    });
+    console.log("getRegister response", response);
+  };
 
   const {
     control,
@@ -39,13 +47,10 @@ export default function RegisterScreen() {
   });
 
   const onSubmit = async (data: FormData) => {
-    const response = await request(
-      "https://jsonplaceholder.typicode.com/posts",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      },
-    );
+    const response = await request("https://api.localhost:8081/register", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
 
     console.log("response ", response);
   };

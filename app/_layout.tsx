@@ -11,6 +11,12 @@ import "@/global.css";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
+if (__DEV__) {
+  require("@/msw.polyfills");
+  const { server } = require("@/mocks/server");
+  server.listen();
+}
+
 export const unstable_settings = {
   anchor: "index",
 };
