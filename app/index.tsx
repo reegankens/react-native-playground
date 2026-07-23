@@ -55,7 +55,7 @@ export default function RegisterScreen() {
 
   const onSubmit = async (data: FormData) => {
     const response = await request<FormData>(
-      "https://api.localhost:8081/register",
+      "http://api.localhost:8081/register",
       {
         method: "POST",
         body: JSON.stringify(data),
