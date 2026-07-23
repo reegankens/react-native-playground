@@ -9,4 +9,11 @@ export const handlers = [
       email: "bhakti@eduardd.com",
     });
   }),
+  http.post("http://api.localhost:8081/register", () => {
+    return HttpResponse.json({
+      id: "abc-123",
+      fullName: "Eduard",
+      email: "bhakti@eduardd.com",
+    });
+  }),
 ];
