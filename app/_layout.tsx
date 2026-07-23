@@ -10,12 +10,7 @@ import "react-native-reanimated";
 import "@/global.css";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
-
-if (__DEV__) {
-  require("@/msw.polyfills");
-  const { server } = require("@/mocks/server");
-  server.listen();
-}
+import { useEffect, useState } from "react";
 
 export const unstable_settings = {
   anchor: "index",
@@ -23,6 +18,25 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      if (__DEV__) {
+        await import("@/msw.polyfills");
+        const { server } = await import("@/mocks/server");
+        server.listen();
+      }
+
+      setReady(true);
+    }
+
+    prepare();
+  }, []);
+
+  if (!ready) {
+    return null;
+  }
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DefaultTheme : DarkTheme}>
