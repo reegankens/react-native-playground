@@ -27,6 +27,7 @@
       "bundler": "metro"
     },
     "plugins": [
+      ["expo-system-ui", { "backgroundColor": "#F2F2F2" }],
       "expo-router",
       [
         "expo-splash-screen",

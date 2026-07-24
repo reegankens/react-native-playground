@@ -1,8 +1,4 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
@@ -10,7 +6,6 @@ import "react-native-reanimated";
 import "@/global.css";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { useEffect, useState } from "react";
 
 export const unstable_settings = {
   anchor: "index",
@@ -18,28 +13,29 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [ready, setReady] = useState(false);
+  // const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    async function prepare() {
-      if (__DEV__) {
-        await import("@/msw.polyfills");
-        const { server } = await import("@/mocks/server");
-        server.listen();
-      }
+  // useEffect(() => {
+  //   async function prepare() {
+  //     console.log("prepare ", __DEV__);
+  //     if (__DEV__) {
+  //       await import("@/msw.polyfills");
+  //       const { server } = await import("@/mocks/server");
+  //       server.listen();
+  //     }
 
-      setReady(true);
-    }
+  //     setReady(true);
+  //   }
+  //   console.log("prepare start: ", __DEV__);
+  //   prepare();
+  // }, []);
 
-    prepare();
-  }, []);
-
-  if (!ready) {
-    return null;
-  }
+  // if (!ready) {
+  //   return null;
+  // }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DefaultTheme : DarkTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>

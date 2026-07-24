@@ -1,6 +1,6 @@
 import { request } from "@/shared/api.client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button, ScrollView, Text, TextInput, View } from "react-native";
 import * as yup from "yup";
@@ -20,6 +20,7 @@ export const registerSchema = yup.object({
 });
 
 export default function RegisterScreen() {
+  const [response, setResponse] = useState<FormData | undefined>();
   useEffect(() => {
     getRegister();
     trigger();
@@ -61,6 +62,9 @@ export default function RegisterScreen() {
         body: JSON.stringify(data),
       },
     );
+    setValue("fullName", response.fullName);
+    setValue("email", response.email);
+    setResponse(response);
 
     console.log("response ", response);
   };
@@ -122,6 +126,11 @@ export default function RegisterScreen() {
             <Text style={{ color: "red" }}>{errors.email.message}</Text>
           )}
         </View>
+
+        <Text>
+          response:
+          {JSON.stringify(response, null, 2)}
+        </Text>
 
         <Button
           title="Register"
