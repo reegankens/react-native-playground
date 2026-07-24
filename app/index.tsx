@@ -80,7 +80,7 @@ export default function RegisterScreen() {
             name="fullName"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                placeholder="John Doe"
+                placeholder="Enter your full name"
                 value={value}
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -89,6 +89,7 @@ export default function RegisterScreen() {
                   borderRadius: 8,
                   padding: 12,
                 }}
+                testID="fullname"
               />
             )}
           />
@@ -107,7 +108,7 @@ export default function RegisterScreen() {
             name="email"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                placeholder="john@mail.com"
+                placeholder="Enter your email"
                 keyboardType="email-address"
                 autoCapitalize="none"
                 value={value}
@@ -118,6 +119,7 @@ export default function RegisterScreen() {
                   borderRadius: 8,
                   padding: 12,
                 }}
+                testID="email"
               />
             )}
           />
@@ -132,10 +134,12 @@ export default function RegisterScreen() {
           {JSON.stringify(response, null, 2)}
         </Text>
 
+        <Text> {isValid} </Text>
         <Button
           title="Register"
           onPress={handleSubmit(onSubmit)}
-          disabled={!isValid}
+          color="#2196F3"
+          testID="btn_register"
         />
       </View>
     </ScrollView>
