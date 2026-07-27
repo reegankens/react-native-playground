@@ -1,6 +1,6 @@
 url: exp://127.0.0.1:8081
 ---
-- openLink: exp://127.0.0.1:8081
+- openLink: exp://10.1.2.10:8081
 # cek tombol register jika ada, ini bener menu register
 - assertVisible:
     id: "btn_register"
@@ -18,5 +18,5 @@ url: exp://127.0.0.1:8081
 - tapOn:
     id: "btn_register"
 
-- assertVisible: "response:{  \"id\": \"1~uuid\",\n  \"fullName\": \"Test Fullname\",\n  \"email\": \"test@mail.com\"\n}"
+- assertVisible: "response:{\"id\":\"1~uuid\",\"fullName\":\"Test Fullname\",\"email\":\"test@mail.com\"}"
 # register sukses

@@ -2,7 +2,13 @@ import { request } from "@/shared/api.client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Button, ScrollView, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View
+} from "react-native";
 import * as yup from "yup";
 
 type FormData = {
@@ -129,18 +135,30 @@ export default function RegisterScreen() {
           )}
         </View>
 
-        <Text>
-          response:
-          {JSON.stringify(response, null, 2)}
-        </Text>
+        <Text>response:{JSON.stringify(response)}</Text>
 
         <Text> {isValid} </Text>
-        <Button
-          title="Register"
+        <Pressable
           onPress={handleSubmit(onSubmit)}
-          color="#2196F3"
+          disabled={!isValid}
           testID="btn_register"
-        />
+          style={{
+            backgroundColor: isValid ? "#2196F3" : "#D1D5DB",
+            padding: 14,
+            borderRadius: 8,
+            alignItems: "center",
+            opacity: isValid ? 1 : 0.7,
+          }}
+        >
+          <Text
+            style={{
+              color: isValid ? "#FFFFFF" : "#6B7280",
+              fontWeight: "600",
+            }}
+          >
+            Register
+          </Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
