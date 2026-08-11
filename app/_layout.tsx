@@ -12,7 +12,7 @@ import "@/global.css";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export const unstable_settings = {
-  anchor: "crud",
+  anchor: "index",
 };
 
 export default function RootLayout() {
