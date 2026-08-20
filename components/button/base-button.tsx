@@ -2,7 +2,7 @@ import { Pressable } from "react-native";
 
 type BaseButtonProps = {
   onChange: (value: string) => void;
-  children?: React.ReactNode;
+  children?: React.ReactNode; //menggunakan ? agar di parent tidak harus menggunakan children atau basic slot seperti di vue
 };
 export function BaseButton({ onChange, children }: BaseButtonProps) {
   return (
