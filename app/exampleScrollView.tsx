@@ -1,8 +1,12 @@
 import { Image, ScrollView, Text, View } from "react-native";
 
-export function ExampleScrollView() {
+export default function ExampleScrollView() {
   return (
     <ScrollView>
+      <View>
+        <Text style={{ fontSize: 20 }}>Ini Contoh Scroll View</Text>
+      </View>
+
       {Array.from({ length: 100 }, (_, index) => (
         <View
           key={index}
