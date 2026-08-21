@@ -1,10 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Fallthrough } from "./fallthrough";
+import { ExampleScrollView } from "./exampleScrollView";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView className="flex-1" edges={["top"]}>
-      <Fallthrough />
+      <ExampleScrollView />
     </SafeAreaView>
   );
 }
