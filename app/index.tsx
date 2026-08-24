@@ -8,21 +8,33 @@ export default function HomeScreen() {
   const [visible, setVisible] = useState(false);
   
   return (
-    <SafeAreaView className="flex-1" edges={["top"]}>
-      
+    <SafeAreaView edges={["top"]}>
       <ExampleModal 
         visible={visible} 
-        transparent={false}
+        transparent={true}
         onRequestClose={()=>{
+          //ketika click tombol back di android, ini belum sempet dicoba
           console.log('onRequestClose: ');
           setVisible(false);
         }}
         animationType="fade"
       >
-        <View>
-          <Text>Hello Modal</Text>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'gray'}}>
+          <View style={{backgroundColor:'green',padding:10,width:200,height:200}}>
+            <Text>Hello Modal</Text>
+            <View style={{flex:1,flexDirection: "column",justifyContent:'flex-end'}}>
+              <Button title="Close" 
+              onPress={()=>{
+                setVisible(false)
+              }}
+            />
+            </View>
+            
+          </View>
+          
         </View>
       </ExampleModal>
+
       <View>
         <Text>Show Modal: {visible ? "true" : "false"}</Text>
       </View>
@@ -31,6 +43,7 @@ export default function HomeScreen() {
         console.log('click show modal')
         setVisible(!visible);
       }}/>
+      
     </SafeAreaView>
   );
 }
