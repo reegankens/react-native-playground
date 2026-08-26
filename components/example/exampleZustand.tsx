@@ -1,14 +1,33 @@
-import { useUserStore } from "@/stores/userStore";
-import { Button, Text, View } from "react-native";
+import { getToken, removeToken, setToken } from "@/stores/useAsyncStorage";
+import { useUserStorePersist } from "@/stores/userStorePersist";
+import { useState } from "react";
+
+import { Button, Pressable, Text, View } from "react-native";
+
 
 export function  ExampleZustand(){
-  const {name, setName} = useUserStore();
+
+  const {name, setName} = useUserStorePersist();
+  const [getTokenName, setTokenName] = useState<string | null>();
   return (
     <View>
       <Text>{name}</Text>
       <Button title="Change Name" onPress={()=>{
         setName('Budi')
       }}></Button>
+      <Text>{getTokenName}</Text>
+      <Button title="Set Token abc123" onPress={async ()=>{
+        const token = await setToken();
+        setTokenName(token);
+      }}/>
+      <Button title="Get Token" onPress={async ()=>{
+        const token = await getToken()
+        setTokenName(token);
+      }}/>
+      <Pressable style={{backgroundColor:'red', justifyContent:'center', alignItems:'center',padding:4}} onPress={ async ()=>{
+        const token = await removeToken();
+        setTokenName(token);
+      }}><Text style={{color:'white',}}>Remove Token</Text></Pressable>
     </View>
 
   );
