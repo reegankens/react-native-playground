@@ -8,7 +8,7 @@ type UserState = {
   setName: (name: string) => void;
 };
 
-export const useUserStorePersist = create<UserState>()(
+export const useUserStorePersistAsyncStorage = create<UserState>()(
   persist(
     (set) => ({
       name: "Eduard",
@@ -17,7 +17,6 @@ export const useUserStorePersist = create<UserState>()(
     {
       name: "user-storage",
       storage: createJSONStorage(()=> {
-        console.log('storage ',AsyncStorage)
         return AsyncStorage
       }),
     },
