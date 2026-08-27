@@ -22,7 +22,7 @@ export const useUserStoreSqlite = create<UserState>((set) => ({
       const users = await userRepository.findAll();
       
       console.log('useUserStoreSqlite ',users)
-      
+
       set({
         users,
         loading:false,
@@ -37,12 +37,20 @@ export const useUserStoreSqlite = create<UserState>((set) => ({
   },
 
   addUser: async (name, age) => {
-    await userRepository.create(name, age);
+    set({loading:true});
+    try{
+      await userRepository.create(name, age);
 
-    //refresh state setelah insert
-    const users = await userRepository.findAll();
+      //refresh state setelah insert
+      const users = await userRepository.findAll();
 
-    set({ users });
+      set({ users, loading:false });
+    }
+    catch(e){
+      console.error(e)
+      set({loading:false})
+      
+    }
   }
 
 }));

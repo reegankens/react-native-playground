@@ -8,7 +8,7 @@ export async function migrate() {
   const result = await database.getFirstAsync<{ user_version: number }>(
     "PRAGMA user_version"
   );
-  console.log('Migration: METADATA_DATABASE ',result);
+  console.log('Migration START : METADATA_DATABASE ',result);
 
   let currentVersion = result?.user_version ?? 0;
 
@@ -38,5 +38,5 @@ export async function migrate() {
   const metadata = await database.getFirstAsync<{ user_version: number }>(
     "PRAGMA user_version"
   );
-  console.log('Migration: METADATA_DATABASE ',metadata);
+  console.log('Migration END: METADATA_DATABASE ',metadata);
 }
